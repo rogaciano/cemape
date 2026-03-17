@@ -30,3 +30,15 @@ class ProcessoManager(models.Manager):
 
     def em_andamento(self):
         return self.get_queryset().em_andamento()
+
+    def do_demandante(self, user):
+        return self.get_queryset().do_demandante(user)
+
+    def do_arbitro(self, user):
+        return self.get_queryset().do_arbitro(user)
+
+    def publicos(self):
+        return self.get_queryset().publicos()
+
+    def com_relacionados(self):
+        return self.get_queryset().com_relacionados()
