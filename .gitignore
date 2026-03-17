@@ -10,3 +10,7 @@ node_modules/
 .DS_Store
 media/
 staticfiles/
+
+# Claude / Agent (nunca subir histórico de sessões e worktrees)
+.claude/
+.agent/
