@@ -28,6 +28,7 @@ class EntradaCalculadora:
     quantidade_arbitros: int = 1            # 1 (árbitro único) ou 3 (tribunal)
     procedimento_expedito: bool = False     # só Arbitragem
     horas_trabalhadas: Optional[Decimal] = None   # só Mediação
+    quantidade_mediadores: int = 1          # só Mediação
     instituicao: str = 'CEMAPE'
 
 
@@ -302,10 +303,20 @@ class CalculadoraService:
                 f'Horas trabalhadas: {horas_in}h → faturadas: {horas_fat}h.'
             )
 
-        itens = [ItemHonorario(
-            f'Mediador ({horas_fat}h × R$ {valor_hora:,.2f}/h)',
-            total_hon,
-        )]
+        qtd = max(1, e.quantidade_mediadores or 1)
+        hon_por_mediador = total_hon
+        itens = []
+        for i in range(1, qtd + 1):
+            label = f'Mediador {i}' if qtd > 1 else 'Mediador'
+            itens.append(ItemHonorario(
+                f'{label} ({horas_fat}h × R$ {valor_hora:,.2f}/h)',
+                hon_por_mediador,
+            ))
+
+        total_hon = _moeda(hon_por_mediador * qtd)
+        if qtd > 1:
+            obs.append(f'{qtd} mediadores × R$ {hon_por_mediador:,.2f} cada = R$ {total_hon:,.2f} total de honorários.')
+
         custo_total = _moeda(taxa_registro + taxa_admin + total_hon)
 
         return ResultadoCalculadora(

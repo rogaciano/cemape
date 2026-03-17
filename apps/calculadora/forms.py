@@ -41,7 +41,7 @@ class CalculadoraForm(forms.Form):
         widget=forms.CheckboxInput(attrs={'class': 'h-4 w-4 text-blue-600 border-gray-300 rounded'}),
     )
     horas_trabalhadas = forms.DecimalField(
-        label='Horas trabalhadas pelo mediador',
+        label='Horas trabalhadas por mediador',
         required=False,
         min_value=Decimal('0'),
         max_digits=6,
@@ -52,4 +52,17 @@ class CalculadoraForm(forms.Form):
             'step': '0.5',
         }),
         help_text='Frações de hora: até 30 min = meia hora; acima = hora cheia.',
+    )
+    quantidade_mediadores = forms.IntegerField(
+        label='Quantidade de Mediadores',
+        min_value=1,
+        max_value=10,
+        initial=1,
+        required=False,
+        widget=forms.NumberInput(attrs={
+            'class': 'w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none',
+            'min': '1',
+            'max': '10',
+        }),
+        help_text='Informe quantos mediadores participam da sessão.',
     )

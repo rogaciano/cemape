@@ -34,6 +34,7 @@ def calcular(request):
             quantidade_arbitros=dados['quantidade_arbitros'],
             procedimento_expedito=dados.get('procedimento_expedito', False),
             horas_trabalhadas=dados.get('horas_trabalhadas') or None,
+            quantidade_mediadores=dados.get('quantidade_mediadores') or 1,
         )
         try:
             service = CalculadoraService()
