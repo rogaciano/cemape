@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custas | CEMAPE</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body class="bg-gray-50 min-h-full antialiased text-gray-900">
+
+<script>
+    document.body.addEventListener('htmx:configRequest', function(evt) {
+        evt.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+
+    function valorDemandaInput() {
+        return {
+            cents: 0,
+            get display() {
+                if (this.cents === 0) return '';
+                var n = this.cents / 100;
+                var parts = n.toFixed(2).split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                return parts[0] + ',' + parts[1];
+            },
+            get rawValue() {
+                return this.cents > 0 ? (this.cents / 100).toFixed(2) : '';
+            },
+            handleKey(e, root) {
+                var key = e.key;
+                if (key === 'Backspace') {
+                    this.cents = Math.floor(this.cents / 10);
+                    e.preventDefault();
+                } else if (key >= '0' && key <= '9') {
+                    if (this.cents < 9999999999) {
+                        this.cents = this.cents * 10 + parseInt(key);
+                    }
+                    e.preventDefault();
+                } else if (['Tab', 'ArrowLeft', 'ArrowRight', 'F5', 'F12'].indexOf(key) === -1) {
+                    e.preventDefault();
+                }
+                setTimeout(function() {
+                    var hidden = root.querySelector('[name=valor_demanda]');
+                    if (hidden) hidden.dispatchEvent(new Event('change', { bubbles: true }));
+                }, 0);
+            }
+        };
+    }
+</script>
+
+<!-- Header público -->
+<header class="bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center gap-3">
+        <div>
+            <span class="text-2xl font-bold text-blue-700">CEMAPE</span>
+            <span class="ml-2 text-sm text-gray-500 hidden sm:inline">Centro de Mediação e Arbitragem de Pernambuco</span>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 py-10"
+      x-data="{
+          procedimento: 'ARBITRAGEM',
+          get mostrarArbitros() { return this.procedimento === 'ARBITRAGEM'; },
+          get mostrarExpedito() { return this.procedimento === 'ARBITRAGEM'; },
+          get mostrarHoras() { return this.procedimento === 'MEDIACAO'; },
+      }">
+
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-gray-900">Calculadora de Custas e Honorários</h1>
+        <p class="text-gray-500 mt-2">Estime os custos de um procedimento de arbitragem ou mediação</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+        <!-- Formulário -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-5">Parâmetros</h2>
+
+                <form hx-post="{% url 'calculadora:calcular' %}"
+                      hx-target="#resultado"
+                      hx-swap="innerHTML"
+                      hx-indicator="#spinner"
+                      hx-trigger="change, submit"
+                      class="space-y-5">
+                    {% csrf_token %}
+
+                    <!-- Valor da Demanda -->
+                    <div x-data="valorDemandaInput()">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Valor da Demanda (R$) <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text"
+                               :value="display"
+                               @keydown="handleKey($event, $root)"
+                               placeholder="0,00"
+                               autocomplete="off"
+                               class="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="hidden" name="valor_demanda" :value="rawValue">
+                        {% if form.valor_demanda.errors %}
+                            <p class="text-xs text-red-500 mt-1">{{ form.valor_demanda.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Procedimento -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Procedimento</label>
+                        <div class="flex gap-4">
+                            {% for choice in form.tipo_procedimento %}
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="tipo_procedimento" value="{{ choice.data.value }}"
+                                       x-model="procedimento"
+                                       {% if choice.data.selected %}checked{% endif %}
+                                       class="h-4 w-4 text-blue-600 border-gray-300">
+                                <span class="text-sm font-medium">{{ choice.data.label }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Composição (só Arbitragem) -->
+                    <div x-show="mostrarArbitros" x-cloak>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Composição</label>
+                        <div class="flex flex-col gap-2">
+                            {% for choice in form.quantidade_arbitros %}
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="quantidade_arbitros" value="{{ choice.data.value }}"
+                                       {% if choice.data.selected %}checked{% endif %}
+                                       class="h-4 w-4 text-blue-600 border-gray-300">
+                                <span class="text-sm">{{ choice.data.label }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Expedito (só CEMAPE Arbitragem) -->
+                    <div x-show="mostrarExpedito" x-cloak>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            {{ form.procedimento_expedito }}
+                            <span class="text-sm font-medium text-gray-700">{{ form.procedimento_expedito.label }}</span>
+                        </label>
+                    </div>
+
+                    <!-- Horas trabalhadas (só Mediação) -->
+                    <div x-show="mostrarHoras" x-cloak>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            {{ form.horas_trabalhadas.label }}
+                        </label>
+                        {{ form.horas_trabalhadas }}
+                        <p class="text-xs text-gray-400 mt-1">{{ form.horas_trabalhadas.help_text }}</p>
+                    </div>
+
+                    <button type="submit"
+                            class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <span id="spinner" class="htmx-indicator">
+                            <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                            </svg>
+                        </span>
+                        Calcular Custas
+                    </button>
+                </form>
+            </div>
+
+            <p class="text-xs text-gray-400 text-center mt-4">
+                Os valores são estimativas baseadas nas tabelas oficiais vigentes.
+                Consulte a secretaria do CEMAPE para valores definitivos.
+            </p>
+        </div>
+
+        <!-- Resultado -->
+        <div class="lg:col-span-3">
+            <div id="resultado">
+                {% include 'calculadora/resultado_vazio.html' %}
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div class="border-t border-gray-200 bg-white mt-4">
+    {% include 'calculadora/regulamento.html' %}
+</div>
+
+</body>
+</html>

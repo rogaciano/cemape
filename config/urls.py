@@ -10,6 +10,7 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls', namespace='accounts')),
     path('processos/', include('apps.processos.urls', namespace='processos')),
     path('dashboard/', include('apps.core.urls')),
+    path('calculadora/', include('apps.calculadora.urls', namespace='calculadora')),
 ]
 
 if settings.DEBUG:

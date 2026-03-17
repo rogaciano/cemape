@@ -1,0 +1,22 @@
+[Unit]
+Description=Gunicorn daemon para CEMAPE
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/cemape
+EnvironmentFile=/var/www/cemape/.env
+ExecStart=/var/www/cemape/.venv/bin/gunicorn \
+    --workers 3 \
+    --bind 127.0.0.1:8003 \
+    --timeout 120 \
+    --access-logfile /var/log/cemape/access.log \
+    --error-logfile /var/log/cemape/error.log \
+    config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

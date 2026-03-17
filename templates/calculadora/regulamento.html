@@ -1,0 +1,295 @@
+<section class="max-w-5xl mx-auto px-4 pb-16 mt-12" x-data="{ aba: 'arbitragem' }">
+
+    <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-900">Regulamento de Custas e Honorários</h2>
+        <p class="text-gray-500 mt-1 text-sm">Base normativa utilizada para o cálculo acima</p>
+    </div>
+
+    <!-- Abas -->
+    <div class="flex border-b border-gray-200 mb-8">
+        <button @click="aba = 'arbitragem'"
+                :class="aba === 'arbitragem' ? 'border-blue-600 text-blue-700 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-700'"
+                class="px-6 py-3 text-sm border-b-2 -mb-px transition">
+            Arbitragem
+        </button>
+        <button @click="aba = 'mediacao'"
+                :class="aba === 'mediacao' ? 'border-blue-600 text-blue-700 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-700'"
+                class="px-6 py-3 text-sm border-b-2 -mb-px transition">
+            Mediação
+        </button>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ABA: ARBITRAGEM                                                   -->
+    <!-- ================================================================ -->
+    <div x-show="aba === 'arbitragem'" x-cloak class="space-y-8">
+
+        <!-- Introdução -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Das Custas e dos Honorários</h3>
+            <p><strong>Art. 1º</strong> – Este Regulamento dispõe sobre os critérios de cálculo, cobrança e pagamento das custas e honorários nos procedimentos de Arbitragem administrados pelo CEMAPE.</p>
+            <p><strong>Art. 2º</strong> – Os custos básicos necessários para o desenvolvimento completo de um procedimento de Arbitragem compreendem:</p>
+            <ul class="list-none pl-4 space-y-1">
+                <li><strong>I</strong> – Taxa de Registro;</li>
+                <li><strong>II</strong> – Taxa de Administração;</li>
+                <li><strong>III</strong> – Honorários do(s) Árbitro(s).</li>
+            </ul>
+            <p><strong>Parágrafo único.</strong> Todos os custos serão calculados tendo por base o Valor Econômico da Demanda, de forma progressiva e proporcional, sendo integralmente definidos e informados às partes no início do procedimento.</p>
+            <p><strong>Art. 3º</strong> – O Valor Econômico da Demanda corresponderá ao montante em disputa, devendo ser atribuído de comum acordo pelas partes e pelo(s) árbitro(s).</p>
+        </div>
+
+        <!-- Taxa de Registro -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Taxa de Registro</h3>
+            <p><strong>Art. 4º</strong> – A Taxa de Registro é a contrapartida devida para análise inicial do pedido e a instauração do procedimento arbitral.</p>
+            <p><strong>§ 1º.</strong> A Taxa de Registro será calculada, de forma progressiva e proporcional, à razão de <strong>1% (um por cento)</strong> do Valor Econômico da Demanda informado no ato da solicitação da arbitragem, observados o <strong>piso de R$ 500,00</strong> (quinhentos reais) e o <strong>teto de R$ 20.000,00</strong> (vinte mil reais).</p>
+            <p><strong>§ 2º.</strong> O pagamento da Taxa de Registro deverá ser feito, pela parte solicitante, no ato da solicitação do procedimento arbitral.</p>
+            <p><strong>§ 3º.</strong> Em caso de não prosseguimento do feito por razão de recusa da parte solicitada, será feito o reembolso de 50% (cinquenta por cento) do montante pago a título de Taxa de Registro.</p>
+        </div>
+
+        <!-- Taxa de Administração -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Taxa de Administração</h3>
+            <p><strong>Art. 5º</strong> – A Taxa de Administração remunera a gestão do procedimento arbitral pela Câmara, compreendendo, entre outras atividades: Secretaria e comunicações oficiais; controle de prazos e atos procedimentais; organização de audiências e reuniões; apoio administrativo ao(s) árbitro(s).</p>
+            <p><strong>§ 1º.</strong> A Taxa de Administração será calculada com base no Valor Econômico da Demanda, de forma progressiva e proporcional, observados o <strong>piso de R$ 1.500,00</strong> e o <strong>teto de R$ 200.000,00</strong>, conforme quadro abaixo:</p>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wide">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Valor da Demanda (R$)</th>
+                            <th class="px-4 py-3 text-right">Taxa de Administração (R$)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">Até 50.000</td><td class="px-4 py-2 text-right">1.500 (piso)</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">50.000 – 100.000</td><td class="px-4 py-2 text-right">1.500 → 3.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">100.000 – 200.000</td><td class="px-4 py-2 text-right">3.000 → 5.200</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">200.000 – 300.000</td><td class="px-4 py-2 text-right">5.200 → 6.100</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">300.000 – 500.000</td><td class="px-4 py-2 text-right">6.100 → 6.600</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">500.000 – 750.000</td><td class="px-4 py-2 text-right">6.600 → 7.930</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">750.000 – 1.000.000</td><td class="px-4 py-2 text-right">8.930 → 10.400</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">1.000.000 – 2.000.000</td><td class="px-4 py-2 text-right">10.400 → 14.810</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">2.000.000 – 5.000.000</td><td class="px-4 py-2 text-right">14.810 → 25.600</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">5.000.000 – 10.000.000</td><td class="px-4 py-2 text-right">25.600 → 35.120</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">10.000.000 – 20.000.000</td><td class="px-4 py-2 text-right">35.120 → 56.050</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">20.000.000 – 40.000.000</td><td class="px-4 py-2 text-right">56.050 → 84.390</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">40.000.000 – 80.000.000</td><td class="px-4 py-2 text-right">80.440 → 111.750</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">80.000.000 – 150.000.000</td><td class="px-4 py-2 text-right">96.090 → 123.130</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">150.000.000 – 250.000.000</td><td class="px-4 py-2 text-right">123.130 → 146.110</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">250.000.000 – 500.000.000</td><td class="px-4 py-2 text-right font-medium text-blue-700">146.110 → 200.000 (teto)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>§ 2º.</strong> A Taxa de Administração será paga integralmente no início do procedimento arbitral.</p>
+        </div>
+
+        <!-- Honorários dos Árbitros -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Dos Honorários dos Árbitros</h3>
+            <p><strong>Art. 6º</strong> – Os Honorários do(s) Árbitro(s) correspondem à remuneração deste(s) pela condução e julgamento da demanda.</p>
+            <p><strong>§ 1º.</strong> Os honorários serão calculados com base no Valor Econômico da Demanda, de forma progressiva e proporcional, observados o <strong>piso de R$ 3.000,00</strong> e o <strong>teto de R$ 350.000,00</strong> por árbitro, conforme quadro abaixo:</p>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wide">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Valor da Demanda (R$)</th>
+                            <th class="px-4 py-3 text-right">Honorários do Árbitro (R$)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">Até 50.000</td><td class="px-4 py-2 text-right">3.000 (piso)</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">50.000 – 100.000</td><td class="px-4 py-2 text-right">3.000 → 6.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">100.000 – 200.000</td><td class="px-4 py-2 text-right">6.000 → 11.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">200.000 – 300.000</td><td class="px-4 py-2 text-right">11.000 → 13.500</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">300.000 – 500.000</td><td class="px-4 py-2 text-right">13.500 → 16.070</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">500.000 – 750.000</td><td class="px-4 py-2 text-right">16.070 → 20.790</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">750.000 – 1.000.000</td><td class="px-4 py-2 text-right">22.920 → 26.070</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">1.000.000 – 2.000.000</td><td class="px-4 py-2 text-right">26.070 → 34.560</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">2.000.000 – 5.000.000</td><td class="px-4 py-2 text-right">34.560 → 54.580</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">5.000.000 – 10.000.000</td><td class="px-4 py-2 text-right">54.580 → 71.120</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">10.000.000 – 20.000.000</td><td class="px-4 py-2 text-right">71.120 → 111.910</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">20.000.000 – 40.000.000</td><td class="px-4 py-2 text-right">111.910 → 163.170</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">40.000.000 – 80.000.000</td><td class="px-4 py-2 text-right">155.010 → 212.620</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">80.000.000 – 150.000.000</td><td class="px-4 py-2 text-right">192.850 → 251.750</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">150.000.000 – 250.000.000</td><td class="px-4 py-2 text-right">251.750 → 296.400</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">250.000.000 – 500.000.000</td><td class="px-4 py-2 text-right font-medium text-blue-700">296.400 → 350.000 (teto)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="space-y-2">
+                <p><strong>§ 2º.</strong> Os valores indicados no quadro correspondem aos honorários base de cada árbitro.</p>
+                <p><strong>§ 3º.</strong> No caso de um tribunal arbitral, os honorários do respectivo presidente serão calculados pelo valor base acrescido de <strong>10% (dez por cento)</strong>.</p>
+                <p><strong>§ 4º.</strong> No caso de árbitro único, deverá ser feito o cálculo dos honorários pelo valor base acrescido de <strong>20% (vinte por cento)</strong>.</p>
+                <p><strong>§ 5º.</strong> Os honorários deverão ser caucionados pelas partes no ato da instauração da Arbitragem, sendo repassados ao(s) árbitro(s) apenas no momento da prolação da sentença arbitral.</p>
+            </div>
+        </div>
+
+        <!-- Fórmula de Cálculo -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Fórmula de Cálculo</h3>
+            <p><strong>Art. 7º</strong> – A Taxa de Administração e os Honorários do(s) Árbitro(s) serão calculados tendo por base os quadros dispostos nos arts. 5º e 6º, obedecendo a seguinte fórmula:</p>
+            <div class="bg-gray-50 rounded-xl p-5 text-center font-mono text-gray-800 text-base border border-gray-100">
+                V = V<sub>min</sub> + ((VD − FC<sub>min</sub>) / (FC<sub>max</sub> − FC<sub>min</sub>)) × (V<sub>max</sub> − V<sub>min</sub>)
+            </div>
+            <ul class="list-none pl-2 space-y-1 text-gray-600">
+                <li><strong>FC<sub>min</sub></strong> = limite inferior da faixa (valor da demanda mínimo da faixa)</li>
+                <li><strong>FC<sub>max</sub></strong> = limite superior da faixa (valor da demanda máximo da faixa)</li>
+                <li><strong>V<sub>min</sub></strong> = valor mínimo do item na faixa</li>
+                <li><strong>V<sub>max</sub></strong> = valor máximo do item na faixa</li>
+                <li><strong>VD</strong> = valor da demanda</li>
+                <li><strong>V</strong> = valor final</li>
+            </ul>
+        </div>
+
+        <!-- Arbitragem Expedita -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Arbitragem Expedita</h3>
+            <p><strong>Art. 8º</strong> – Poderá ser adotado o procedimento de arbitragem expedita nos casos em que não haja necessidade de instrução probatória complexa, sempre mediante concordância expressa das partes.</p>
+            <p><strong>Art. 9º</strong> – Na arbitragem expedita:</p>
+            <ul class="list-none pl-4 space-y-1">
+                <li><strong>I</strong> – O procedimento será sempre conduzido por árbitro único;</li>
+                <li><strong>II</strong> – Os Honorários do Árbitro corresponderão ao valor base previsto no Art. 6º com <strong>desconto de 20% (vinte por cento)</strong>.</li>
+            </ul>
+            <p><strong>Parágrafo único.</strong> A adoção da arbitragem expedita não altera os valores das Taxas de Registro e de Administração.</p>
+        </div>
+
+        <!-- Despesas Adicionais -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Das Despesas Adicionais</h3>
+            <p>Consideram-se despesas adicionais, entre outras: honorários de peritos, assistentes técnicos e especialistas; custos de perícias técnicas, vistorias e inspeções; despesas com intérpretes, tradutores e revisores; despesas de deslocamento, hospedagem e alimentação de árbitros, peritos ou auxiliares, quando indispensáveis; despesas com salas externas, tecnologia e plataformas digitais.</p>
+            <p><strong>§ 1º.</strong> As despesas adicionais não integram a Taxa de Registro, a Taxa de Administração ou os Honorários do(s) Árbitro(s), sendo contratadas e pagas de forma independente, conforme a necessidade da demanda.</p>
+        </div>
+
+        <!-- Disposições Finais -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Das Disposições Finais</h3>
+            <p><strong>Art. 10º</strong> – Os valores exatos das custas e dos honorários serão calculados e informados às partes previamente à instauração do procedimento arbitral, sendo o respectivo pagamento condição para o regular prosseguimento do feito.</p>
+            <p><strong>Art. 11</strong> – Não existindo acordo em sentido contrário, as partes responderão solidariamente pelos valores despendidos a título de Taxa de Registro, Taxa de Administração, Honorários do(s) Árbitro(s) e despesas adicionais.</p>
+            <p><strong>Art. 12</strong> – Excepcionalmente, poderá ser admitida a majoração dos valores cobrados a título de Honorários do(s) Árbitros(s) previstos neste regulamento, desde que atendidos os seguintes requisitos: concordância expressa de todas as partes; exposição de motivos fundamentada; e aprovação formal da Câmara.</p>
+            <p><strong>Art. 13</strong> – Quaisquer descontos nos valores cobrados a título de Taxa de Registro, Taxa de Administração e Honorários do(s) Árbitro(s), serão permitidos unicamente em caso de convênios/parcerias firmados pelo CEMAPE.</p>
+        </div>
+
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ABA: MEDIAÇÃO                                                     -->
+    <!-- ================================================================ -->
+    <div x-show="aba === 'mediacao'" x-cloak class="space-y-8">
+
+        <!-- Introdução -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Das Custas e dos Honorários</h3>
+            <p><strong>Art. 1º</strong> – Este Regulamento dispõe sobre os critérios de cálculo, cobrança e pagamento das custas e honorários nos procedimentos de Mediação administrados pelo CEMAPE.</p>
+            <p><strong>Art. 2º</strong> – Os custos básicos necessários para o desenvolvimento completo de um procedimento de Mediação compreendem:</p>
+            <ul class="list-none pl-4 space-y-1">
+                <li><strong>I</strong> – Taxa de Registro;</li>
+                <li><strong>II</strong> – Taxa de Administração;</li>
+                <li><strong>III</strong> – Honorários do(s) Mediador(es).</li>
+            </ul>
+            <p><strong>Parágrafo único.</strong> Todos os custos serão calculados tendo por base o Valor Econômico da Demanda, de forma progressiva e proporcional, sendo definidos e informados às partes no início do procedimento.</p>
+        </div>
+
+        <!-- Taxa de Registro -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Taxa de Registro</h3>
+            <p><strong>Art. 4º</strong> – A Taxa de Registro é a contrapartida financeira devida para a análise inicial da solicitação e a preparação do procedimento de Mediação.</p>
+            <p><strong>§ 1º.</strong> A Taxa de Registro será calculada, de forma progressiva e proporcional, à razão de <strong>0,5% (meio por cento)</strong> do Valor Econômico da Demanda, observados o <strong>piso de R$ 100,00</strong> (cem reais) e o <strong>teto de R$ 5.000,00</strong> (cinco mil reais).</p>
+            <p><strong>§ 2º.</strong> O pagamento da Taxa de Registro deverá ser feito, pela parte solicitante, no ato da solicitação do procedimento de Mediação.</p>
+            <p><strong>§ 3º.</strong> Em caso de não prosseguimento do feito por razão de recusa da parte solicitada, será feito o reembolso de 50% (cinquenta por cento) da Taxa de Registro.</p>
+        </div>
+
+        <!-- Taxa de Administração -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Da Taxa de Administração</h3>
+            <p><strong>Art. 5º</strong> – A Taxa de Administração remunera a gestão do procedimento de Mediação pela Câmara, compreendendo, entre outras atividades: Secretaria e comunicações oficiais; controle de prazos e atos; organização de audiências e reuniões; apoio administrativo ao(s) mediador(es).</p>
+            <p><strong>§ 1º.</strong> A Taxa de Administração será calculada com base no Valor Econômico da Demanda, de forma progressiva, observados o <strong>piso de R$ 300,00</strong> e o <strong>teto de R$ 30.000,00</strong>, conforme quadro abaixo:</p>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wide">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Valor Econômico da Demanda (R$)</th>
+                            <th class="px-4 py-3 text-right">Taxa de Administração (R$)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">Até 10.000</td><td class="px-4 py-2 text-right">300 (piso)</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 10.001 a 25.000</td><td class="px-4 py-2 text-right">500</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 25.001 a 50.000</td><td class="px-4 py-2 text-right">800</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 50.001 a 100.000</td><td class="px-4 py-2 text-right">1.200</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 100.001 a 250.000</td><td class="px-4 py-2 text-right">2.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 250.001 a 500.000</td><td class="px-4 py-2 text-right">3.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 500.001 a 1.000.000</td><td class="px-4 py-2 text-right">4.500</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 1.000.001 a 2.500.000</td><td class="px-4 py-2 text-right">6.500</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 2.500.001 a 5.000.000</td><td class="px-4 py-2 text-right">9.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 5.000.001 a 10.000.000</td><td class="px-4 py-2 text-right">13.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 10.000.001 a 25.000.000</td><td class="px-4 py-2 text-right">18.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 25.000.001 a 50.000.000</td><td class="px-4 py-2 text-right">22.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 50.000.001 a 100.000.000</td><td class="px-4 py-2 text-right">26.000</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 100.000.001 a 200.000.000</td><td class="px-4 py-2 text-right font-medium text-blue-700">30.000 (teto)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>§ 2º.</strong> A Taxa de Administração será paga integralmente no início do procedimento.</p>
+        </div>
+
+        <!-- Honorários dos Mediadores -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Dos Honorários dos Mediadores</h3>
+            <p><strong>Art. 6º</strong> – Os Honorários do(s) Mediador(es) correspondem à remuneração deste(s) pela condução do procedimento de Mediação.</p>
+            <p><strong>§ 1º.</strong> Os honorários serão pagos de acordo com as horas efetivamente trabalhadas pelo(s) mediador(es), que serão calculadas com base no Valor Econômico da Demanda, de forma progressiva, observados o <strong>piso de R$ 100,00</strong> e o <strong>teto de R$ 3.000,00</strong> por hora trabalhada, conforme quadro abaixo:</p>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wide">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Valor Econômico da Demanda (R$)</th>
+                            <th class="px-4 py-3 text-right">Honorários do Mediador (R$/hora)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">Até 10.000</td><td class="px-4 py-2 text-right">100 (piso)</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 10.001 a 25.000</td><td class="px-4 py-2 text-right">150</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 25.001 a 50.000</td><td class="px-4 py-2 text-right">200</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 50.001 a 100.000</td><td class="px-4 py-2 text-right">300</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 100.001 a 250.000</td><td class="px-4 py-2 text-right">450</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 250.001 a 500.000</td><td class="px-4 py-2 text-right">650</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 500.001 a 1.000.000</td><td class="px-4 py-2 text-right">900</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 1.000.001 a 2.500.000</td><td class="px-4 py-2 text-right">1.200</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 2.500.001 a 5.000.000</td><td class="px-4 py-2 text-right">1.500</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 5.000.001 a 10.000.000</td><td class="px-4 py-2 text-right">1.900</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 10.000.001 a 25.000.000</td><td class="px-4 py-2 text-right">2.300</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 25.000.001 a 50.000.000</td><td class="px-4 py-2 text-right">2.600</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 50.000.001 a 100.000.000</td><td class="px-4 py-2 text-right">2.800</td></tr>
+                        <tr class="hover:bg-gray-50"><td class="px-4 py-2">De 100.000.001 a 200.000.000</td><td class="px-4 py-2 text-right font-medium text-blue-700">3.000 (teto)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="space-y-2">
+                <p><strong>§ 2º.</strong> Serão consideradas no cálculo das horas efetivamente trabalhadas do mediador as seguintes atividades: sessões conjuntas ou individuais; reuniões preparatórias; análise de documentos; elaboração de termos, atas e minutas de acordo; comunicações formais diretamente relacionadas ao procedimento.</p>
+                <p><strong>§ 3º.</strong> O valor mínimo devido a título de honorários será o correspondente a <strong>3 (três) horas trabalhadas</strong> do mediador, devendo este valor ser consignado pelas partes no início do procedimento de Mediação.</p>
+                <p><strong>§ 5º.</strong> Para fins de cálculo do montante devido a título de Honorários do(s) Mediador(es), deverão ser consideradas não apenas as horas trabalhadas integralmente, mas também as frações de hora:</p>
+                <ul class="list-none pl-4 space-y-1">
+                    <li><strong>I</strong> – Excedente de até 30 (trinta) minutos → cobra-se ½ (meia) hora;</li>
+                    <li><strong>II</strong> – Excedente acima de 30 (trinta) minutos → cobra-se 1 (uma) hora inteira.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Disposições Finais -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-3 text-sm text-gray-700 leading-relaxed">
+            <h3 class="font-semibold text-gray-900 text-base uppercase tracking-wide">Das Disposições Finais</h3>
+            <p><strong>Art. 8º</strong> – Os valores devidos a título de custas e de hora trabalhada do(s) mediador(es) serão informados às partes antes do início do procedimento de Mediação, sendo o seu devido pagamento condição para o regular prosseguimento do feito.</p>
+            <p><strong>Art. 9º</strong> – Não existindo acordo em sentido contrário, as partes responderão solidariamente pelos valores despendidos a título de Taxa de Registro, Taxa de Administração, Honorários do(s) Mediador(es) e despesas adicionais.</p>
+            <p><strong>Art. 10º</strong> – A desistência, suspensão ou encerramento antecipado do procedimento de Mediação não afasta a obrigação de pagamento das horas já trabalhadas pelo mediador e das Taxas de Registro e Administrativa.</p>
+            <p><strong>Art. 11</strong> – Excepcionalmente, poderá ser admitida a majoração dos honorários do(s) mediador(es) previstos neste regulamento, desde que atendidos os seguintes requisitos: concordância expressa de todas as partes; exposição de motivos fundamentada; e aprovação formal da Câmara.</p>
+            <p><strong>Art. 12</strong> – Quaisquer descontos nos valores cobrados a título de Taxa de Registro, Taxa de Administração e Honorários do(s) Mediador(es), serão permitidos unicamente em caso de convênios firmados pelo CEMAPE.</p>
+        </div>
+
+    </div>
+
+</section>
