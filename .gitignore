@@ -3,8 +3,10 @@ __pycache__/
 *.pyc
 *.pyo
 db.sqlite3
-/static/css/output.css
-/node_modules/
+static/css/output.css
+node_modules/
+.venv/
 *.log
 .DS_Store
 media/
+staticfiles/
