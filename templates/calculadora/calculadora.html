@@ -30,23 +30,15 @@
             get rawValue() {
                 return this.cents > 0 ? (this.cents / 100).toFixed(2) : '';
             },
-            handleKey(e, root) {
-                var key = e.key;
-                if (key === 'Backspace') {
-                    this.cents = Math.floor(this.cents / 10);
-                    e.preventDefault();
-                } else if (key >= '0' && key <= '9') {
-                    if (this.cents < 9999999999) {
-                        this.cents = this.cents * 10 + parseInt(key);
-                    }
-                    e.preventDefault();
-                } else if (['Tab', 'ArrowLeft', 'ArrowRight', 'F5', 'F12'].indexOf(key) === -1) {
-                    e.preventDefault();
+            handleInput(e, root) {
+                var raw = e.target.value.replace(/\D/g, '');
+                this.cents = raw ? Math.min(parseInt(raw, 10), 9999999999) : 0;
+                e.target.value = this.display;
+                var hidden = root.querySelector('[name=valor_demanda]');
+                if (hidden) {
+                    hidden.value = this.rawValue;
+                    hidden.dispatchEvent(new Event('change', { bubbles: true }));
                 }
-                setTimeout(function() {
-                    var hidden = root.querySelector('[name=valor_demanda]');
-                    if (hidden) hidden.dispatchEvent(new Event('change', { bubbles: true }));
-                }, 0);
             }
         };
     }
@@ -129,7 +121,8 @@
                                 </span>
                                 <input type="text"
                                        :value="display"
-                                       @keydown="handleKey($event, $root)"
+                                       @input="handleInput($event, $root)"
+                                       inputmode="numeric"
                                        placeholder="0,00"
                                        autocomplete="off"
                                        class="flex-1 px-3 py-3 text-lg font-semibold text-slate-800 outline-none bg-white placeholder-slate-300">

@@ -1,11 +1,11 @@
 Django>=4.2,<5.0
 python-decouple==3.8
 django-htmx==1.17.2
-Pillow==10.2.0
+Pillow>=10.4.0
 cryptography>=42.0.0
 
-# Dev (MySQL)
-mysqlclient==2.2.4
+# Dev (MySQL) - PyMySQL é puro Python, sem necessidade de MySQL C Connector
+PyMySQL==1.1.1
 
 # Prod (PostgreSQL)
 # psycopg2-binary==2.9.9
