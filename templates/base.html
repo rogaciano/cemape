@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CEMAPE{% endblock %} | Centro de Mediação e Arbitragem de Pernambuco</title>
+
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="h-full bg-gray-50 text-gray-900 antialiased flex flex-col">
+
+    <script>
+        document.body.addEventListener('htmx:configRequest', function(evt) {
+            evt.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        });
+    </script>
+
+    {% include 'components/navbar.html' %}
+
+    <div class="flex flex-1 overflow-hidden">
+        {% block sidebar %}{% endblock %}
+
+        <main class="flex-1 overflow-y-auto">
+            <div class="container mx-auto px-4 py-8 max-w-7xl">
+                {% include 'components/messages.html' %}
+                {% block page_header %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

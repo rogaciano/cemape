@@ -1,0 +1,28 @@
+{% extends "layouts/auth.html" %}
+{% load ui_tags %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-700">CEMAPE</h1>
+            <p class="text-gray-500 mt-1 text-sm">Centro de Mediação e Arbitragem de Pernambuco</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Acesso ao Sistema</h2>
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% form_field field %}
+                {% endfor %}
+                <button type="submit"
+                        class="w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg hover:bg-blue-700 transition font-semibold mt-2">
+                    Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

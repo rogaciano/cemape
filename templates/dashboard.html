@@ -1,0 +1,53 @@
+{% extends "layouts/dashboard.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_header %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
+    <p class="text-gray-500 text-sm mt-1">Visão geral dos processos arbitrais</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+        <p class="text-xs font-medium text-gray-500 uppercase tracking-wide">Total</p>
+        <p class="text-3xl font-bold text-gray-900 mt-1">{{ total }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-yellow-200 p-5">
+        <p class="text-xs font-medium text-yellow-600 uppercase tracking-wide">Aguardando</p>
+        <p class="text-3xl font-bold text-yellow-700 mt-1">{{ aguardando }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-blue-200 p-5">
+        <p class="text-xs font-medium text-blue-600 uppercase tracking-wide">Em Andamento</p>
+        <p class="text-3xl font-bold text-blue-700 mt-1">{{ em_andamento }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-green-200 p-5">
+        <p class="text-xs font-medium text-green-600 uppercase tracking-wide">Encerrados</p>
+        <p class="text-3xl font-bold text-green-700 mt-1">{{ encerrados }}</p>
+    </div>
+</div>
+
+{% if recentes %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h2 class="text-base font-semibold text-gray-800">Processos Recentes</h2>
+        <a href="{% url 'processos:lista' %}" class="text-sm text-blue-600 hover:underline">Ver todos</a>
+    </div>
+    <div class="divide-y divide-gray-50">
+        {% for p in recentes %}
+        <a href="{% url 'processos:detalhe' p.pk %}"
+           class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition">
+            <div>
+                <p class="text-sm font-medium text-gray-900">{{ p.numero }}</p>
+                <p class="text-xs text-gray-500">{{ p.demandado_nome }}</p>
+            </div>
+            {% load ui_tags %}
+            {% status_badge p.status %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

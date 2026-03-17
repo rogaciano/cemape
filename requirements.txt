@@ -1,0 +1,10 @@
+Django>=4.2,<5.0
+python-decouple==3.8
+django-htmx==1.17.2
+Pillow==10.2.0
+
+# Dev (MySQL)
+mysqlclient==2.2.4
+
+# Prod (PostgreSQL)
+# psycopg2-binary==2.9.9

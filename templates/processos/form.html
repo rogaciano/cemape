@@ -1,0 +1,33 @@
+{% extends "layouts/dashboard.html" %}
+{% load ui_tags %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block page_header %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">{{ titulo }}</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                {% form_field field %}
+            {% endfor %}
+            <div class="flex gap-3 pt-2">
+                <button type="submit"
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                    Salvar
+                </button>
+                <a href="{% url 'processos:lista' %}"
+                   class="bg-white border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition font-medium">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

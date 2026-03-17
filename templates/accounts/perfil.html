@@ -1,0 +1,23 @@
+{% extends "layouts/dashboard.html" %}
+{% load ui_tags %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="max-w-lg">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h2 class="text-lg font-semibold text-gray-800 mb-1">{{ request.user.get_full_name|default:request.user.username }}</h2>
+        <p class="text-sm text-gray-500 mb-6">{{ profile.get_role_display }}</p>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                {% form_field field %}
+            {% endfor %}
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
